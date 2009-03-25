@@ -14,9 +14,7 @@ context "The Campfire notifier" do
   end
 
   test "sends the full message on failure only" do
-    @notifier.any_instance.expects(:room).at_least_once.returns mock \
-      :speak => true,
-      :paste => true
+    @notifier.any_instance.expects(:room).at_least_once.returns mock(:speak => true, :paste => true)
 
     @notifier.any_instance.expects(:full_message).returns('')
     @notifier.any_instance.expects(:short_message).returns('')
@@ -28,6 +26,6 @@ context "The Campfire notifier" do
 
   test "renders a haml config file" do
     haml = Integrity::Notifier::Campfire.to_haml
-    assert haml.include? 'campfire_notifier_account'
+    assert haml.include?('campfire_notifier_account')
   end
 end
