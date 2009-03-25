@@ -9,7 +9,7 @@ context "The Campfire notifier" do
   test "alerts Campfire on build" do
     @notifier.any_instance.expects(:room).at_least_once.returns mock(:speak => true)
     @notifier.any_instance.expects(:short_message).returns('')
-    @notifier.any_instance.expects(:build_url).returns('')
+    @notifier.any_instance.expects(:commit_url).returns('')
     @notifier.notify_of_build(stub_everything(:failed? => false, :project => stub_everything), @config)
   end
 
@@ -18,7 +18,7 @@ context "The Campfire notifier" do
 
     @notifier.any_instance.expects(:full_message).returns('')
     @notifier.any_instance.expects(:short_message).returns('')
-    @notifier.any_instance.expects(:build_url).returns('')
+    @notifier.any_instance.expects(:commit_url).returns('')
 
     @notifier.notify_of_build(stub_everything(:failed? => true, :project => stub_everything), @config)
 

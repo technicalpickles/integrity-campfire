@@ -12,8 +12,8 @@ module Integrity
       end
 
       def deliver!
-        room.speak "#{short_message}. #{build_url}"
-        room.paste full_message if build.failed?
+        room.speak "#{short_message}. #{commit_url}"
+        room.paste full_message if commit.failed?
       end
 
     private
@@ -26,14 +26,14 @@ module Integrity
       end
 
       def short_message
-        "Build #{build.short_commit_identifier} of #{build.project.name} #{build.successful? ? "was successful" : "failed"}"
+        "Build #{commit.short_commit_identifier} of #{commit.project.name} #{commit.successful? ? "was successful" : "failed"}"
       end
 
       def full_message
         <<-EOM
-Commit Message: #{build.commit_message}
-Commit Date: #{build.commited_at}
-Commit Author: #{build.commit_author.name}
+Commit Message: #{commit.commit_message}
+Commit Date: #{commit.commited_at}
+Commit Author: #{commit.commit_author.name}
 
 #{stripped_build_output}
 EOM
